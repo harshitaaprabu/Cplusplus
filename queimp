@@ -1,0 +1,104 @@
+#include <iostream> 
+using namespace std; 
+//Node structure 
+struct node 
+{ 
+ int data; 
+ node *link; 
+ }; 
+//Queue Structure 
+struct q1 
+{ 
+ node *front; 
+ node *rear; 
+ node *link; 
+ }; 
+//Queue Initialization 
+struct queue 
+{ 
+ q1 q; 
+ node *t; 
+ public: 
+ void initialize() 
+ { 
+ q.front = NULL; 
+ q.rear = NULL; 
+ } 
+ void addq(); 
+ void delq(); 
+ void displayq(); 
+ }; 
+ //Function Add Definition 
+ void queue:: addq() 
+ { 
+ t = new(node); 
+ cout << "Enter Item To Add:"; 
+ cin >> t->data; 
+ cout << "Item Added is:" << t->data; 
+ t->link = NULL; 
+ if((q.rear)== NULL) 
+ q.front = t; 
+ else 
+ q.rear->link = t; 
+ q.rear = t; 
+ } 
+ //Function Definition For delq() 
+ void queue::delq() { 
+ if(q.front == NULL) { 
+ cout << "Queue Is Empty"; 
+ q.rear = NULL; 
+ } 
+ else { 
+ t = q.front; 
+ cout << "Item Deleted Is:" << q.front->data; 
+ q.front=q.front->link; 
+ free(t); 
+ } 
+ } 
+ //Function Definition For displayq() 
+ void queue::displayq() 
+ { 
+ if(q.front == NULL) 
+ { 
+cout << " Queue Is Empty"; 
+ } 
+ else 
+ { 
+ cout << "\nFRONT"; 
+ for(t=q.front;t!=NULL;t=t->link) 
+ cout << "-->" << t->data; 
+ cout << "<--REAR\n"; 
+ } 
+ } 
+ //MAIN PROGRAM START HERE 
+ int main() { 
+ int choice; 
+ queue qu; 
+ qu.initialize(); 
+ cout <<"\n\t1-ADD"; 
+ cout <<"\n\t2-DELETE"; 
+ cout <<"\n\t3-DISPLAY"; 
+ cout <<"\n\t4-EXIT"; 
+ // Switch-Case for Menu 
+ while(choice != 4) 
+ { 
+ cout << "\nEnter Your Choice:\t"; 
+ cin >> choice; 
+ switch(choice) { 
+ case 1: 
+ qu.addq(); 
+ break; 
+ case 2: 
+ qu.delq(); 
+ break; 
+ case 3: 
+ qu.displayq(); 
+ break; 
+ case 4: 
+ break; 
+ default: 
+ cout << "Invalid Choice"; 
+ } 
+ } 
+ return 0; 
+ } 
